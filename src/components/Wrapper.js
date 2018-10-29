@@ -8,46 +8,37 @@ class Wrapper extends React.Component {
         this.state = {
             id : '',
             value : '',
-            savedJokes : ((JSON.parse(localStorage.getItem('chuckjokes'))) !== null ? (JSON.parse(localStorage.getItem('chuckjokes'))) : [])
+            savedJokes : ((JSON.parse(localStorage.getItem('chuckjokes'))) !== null 
+                            ? (JSON.parse(localStorage.getItem('chuckjokes'))) 
+                            : [])
         }
-        this.saveJoke = this.saveJoke.bind(this)
-        this.deleteJoke = this.deleteJoke.bind(this)
+        this.editJokesList = this.editJokesList.bind(this)
     }
 
-    saveJoke(id, value) {
+    editJokesList(id, value) {
         let myJokes = this.state.savedJokes
-
-        myJokes.push({id, value})
+        if (value) myJokes.push({id, value})
+        else {
+            let removeIndex = myJokes.map((joke) => { return joke.id; }).indexOf(id)
+            if (removeIndex >= 0) myJokes.splice(removeIndex, 1)
+        }
         localStorage.setItem('chuckjokes', JSON.stringify(myJokes))
         this.setState({
             ...this.state,
             savedJokes : myJokes
         })
-        console.log('Joke ' + id + ' saved!')
     }
 
-    deleteJoke(id) {
-        let jokes = this.state.savedJokes
-        let removeIndex = jokes.map((joke) => { return joke.id; }).indexOf(id)
-        if (removeIndex >= 0) jokes.splice(removeIndex, 1)
-        localStorage.setItem('chuckjokes', JSON.stringify(jokes))
-        this.setState({
-            ...this.state,
-            savedJokes : jokes
-        })
-        console.log('Joke id ' + id + ' deleted!')
-    }
-    
     render() {
         return (
             <>
-            <div><img src='https://media.giphy.com/media/3yhmYJ0A5lQv6/giphy.gif'></img> </div>
-            <RandomJoke saveCb={this.saveJoke} />
+            <div><img src='https://media.giphy.com/media/3yhmYJ0A5lQv6/giphy.gif' alt='logo'></img> </div>
+            <RandomJoke saveCb={this.editJokesList} />
             <h3>SAVED JOKES</h3>
                 <div>{
                     (this.state.savedJokes.length > 0) &&
                     this.state.savedJokes.map((joke) => (
-                        <Joke id={joke.id} value={joke.value} deleteCb={this.deleteJoke} />
+                        <Joke id={joke.id} value={joke.value} deleteCb={this.editJokesList} />
                     ))
                 }
                 </div>

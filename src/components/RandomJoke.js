@@ -15,7 +15,6 @@ class RandomJoke extends React.Component {
     async getRandomJoke() {
         let response = await fetch('https://api.chucknorris.io/jokes/random')
         let data = await response.json()
-        console.log(data)
         this.setState({
             ...this.state,
             id : data.id,
@@ -24,12 +23,11 @@ class RandomJoke extends React.Component {
     }
 
     async saveJoke() {
-        console.log('RJ save')
         this.props.saveCb(this.state.id, this.state.value)
     }
 
     componentWillMount() {
-        this.getRandomJoke();
+        this.getRandomJoke()
     }
 
     render() {
