@@ -2,6 +2,10 @@ import React from 'react'
 import RandomJoke from './RandomJoke'
 import Joke from './Joke'
 
+/**
+ * @description the main component, which includes both section for generating and managing jokes; 
+ * only this component could edit the local storage
+ */
 class Wrapper extends React.Component {
     constructor() {
         super()
@@ -14,7 +18,11 @@ class Wrapper extends React.Component {
         }
         this.editJokesList = this.editJokesList.bind(this)
     }
-
+    /**
+     * @description function that adds/removes jokes from both local storage and component's state
+     * @param {*} id the unique key for a single joke, according to api.chucknorris.io
+     * @param {?} value OPTIONAL, given only to add a new joke to your collection
+     */
     editJokesList(id, value) {
         let myJokes = this.state.savedJokes
         if (value) myJokes.push({id, value})
