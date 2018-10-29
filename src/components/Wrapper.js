@@ -37,21 +37,20 @@ class Wrapper extends React.Component {
         })
         console.log('Joke id ' + id + ' deleted!')
     }
-
+    
     render() {
         return (
             <>
+            <div><img src='https://media.giphy.com/media/3yhmYJ0A5lQv6/giphy.gif'></img> </div>
             <RandomJoke saveCb={this.saveJoke} />
-            <table>
-                <thead><tr><th>saved jokes</th><th>CANC</th></tr></thead>
-                <tbody>{
+            <h3>SAVED JOKES</h3>
+                <div>{
                     (this.state.savedJokes.length > 0) &&
                     this.state.savedJokes.map((joke) => (
                         <Joke id={joke.id} value={joke.value} deleteCb={this.deleteJoke} />
                     ))
                 }
-                </tbody>
-            </table>
+                </div>
             </>
         )
     }

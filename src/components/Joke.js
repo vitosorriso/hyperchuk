@@ -11,10 +11,13 @@ class Joke extends React.Component {
     deleteJoke() {
         this.props.deleteCb(this.props.id)
     }
-
+    
     render() {
         return (
-            <tr><td>{this.props.value}</td><td><button onClick={this.deleteJoke} >DELETE ME</button></td></tr>
+            <div className='joke'>
+                {this.props.value}
+                <button className='button delete' onClick={this.deleteJoke}>DELETE</button>
+            </div>
         )
     }
 }

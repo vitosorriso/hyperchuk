@@ -28,11 +28,15 @@ class RandomJoke extends React.Component {
         this.props.saveCb(this.state.id, this.state.value)
     }
 
+    componentWillMount() {
+        this.getRandomJoke();
+    }
+
     render() {
         return(<>
-            <button onClick={this.getRandomJoke}>FUCK ME</button>
-            <div><h2>{this.state.value}</h2></div>
-            <button onClick={this.saveJoke}>SAVE ME</button>
+            <div><p className='randomjoke'>{this.state.value}</p>
+            <button className='button generate' onClick={this.getRandomJoke}>RANDOM</button>
+            <button className='button add' onClick={this.saveJoke}>SAVE</button></div>
         </>)
     }
 }

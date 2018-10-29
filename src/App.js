@@ -4,7 +4,7 @@ import Wrapper from './components/Wrapper';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App App-header">
         <Wrapper />
       </div>
     );
